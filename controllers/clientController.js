@@ -10,3 +10,22 @@ exports.createClient = async (req, res, next) => {
     next();
   }
 };
+
+exports.getClients = async (req, res, next) => {
+  try {
+    const clientsList = await Clients.find({});
+    res.json(clientsList);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+exports.getClient = async (req, res, next) => {
+  const client = await Clients.findById(req.params.id);
+  if (!client) {
+    res.json({ message: "Client not found with that id" });
+    next();
+  }
+  res.json(client);
+};
