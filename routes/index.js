@@ -7,6 +7,8 @@ module.exports = function () {
   router.post("/clients", clientsController.createClient);
   router.get("/clients", clientsController.getClients);
   router.get("/clients/:id", clientsController.getClient);
+  router.put("/clients/:id", clientsController.updateClient);
+  router.delete("/clients/:id", clientsController.deleteClient);
 
   // test services
   router.get("/", (req, res) => {

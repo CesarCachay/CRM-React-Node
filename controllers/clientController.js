@@ -29,3 +29,30 @@ exports.getClient = async (req, res, next) => {
   }
   res.json(client);
 };
+
+exports.updateClient = async (req, res, next) => {
+  try {
+    const client = await Clients.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      {
+        new: true,
+      },
+    );
+    res.json(client);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+exports.deleteClient = async (req, res, next) => {
+  try {
+    await Clients.findOneAndDelete({ _id: req.params.id });
+    res.json({ message: "Client deleted successfully" });
+  } catch (error) {
+    res.json({ message: "Client not found with that id to delete" });
+    console.log(error);
+    next();
+  }
+};
