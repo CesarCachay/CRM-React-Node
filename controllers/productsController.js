@@ -49,3 +49,47 @@ exports.createProduct = async (req, res, next) => {
     next();
   }
 };
+
+exports.getProducts = async (req, res, next) => {
+  try {
+    const productsList = await Products.find({});
+    res.json(productsList);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+exports.getProduct = async (req, res, next) => {
+  const product = await Products.findById(req.params.id);
+  if (!product) {
+    res.json({ message: "product not found with that id" });
+    return next();
+  }
+  res.json(product);
+};
+
+exports.updateProduct = async (req, res, next) => {
+  try {
+    // build the updated product
+    let updatedProduct = req.body;
+    // verify if there is new image
+    if (req.file) {
+      let outdatedProduct = await Products.findById(req.params.id);
+      updatedProduct.image = req.file.filename;
+    } else {
+      updatedProduct.image = outdatedProduct.image;
+    }
+
+    let product = await Products.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true },
+    );
+    res.json(product);
+  } catch (error) {
+    res.json({ message: "product not found to update" });
+    console.log(error);
+    next();
+  }
+};

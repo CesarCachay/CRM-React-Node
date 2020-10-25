@@ -17,6 +17,13 @@ module.exports = function () {
     productsController.uploadImage,
     productsController.createProduct,
   );
+  router.get("/products", productsController.getProducts);
+  router.get("/products/:id", productsController.getProduct);
+  router.put(
+    "/products/:id",
+    productsController.uploadImage,
+    productsController.updateProduct,
+  );
 
   return router;
 };
