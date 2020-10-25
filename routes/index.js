@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const clientsController = require("../controllers/clientController");
+const clientsController = require("../controllers/clientsController");
+const productsController = require("../controllers/productsController");
 
 module.exports = function () {
   // clients services
@@ -10,13 +11,8 @@ module.exports = function () {
   router.put("/clients/:id", clientsController.updateClient);
   router.delete("/clients/:id", clientsController.deleteClient);
 
-  // test services
-  router.get("/", (req, res) => {
-    res.send("landing");
-  });
-  router.get("/us", (req, res) => {
-    res.send("this is us");
-  });
+  // products services
+  router.post("/products", productsController.createProduct);
 
   return router;
 };
