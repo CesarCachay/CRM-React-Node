@@ -24,6 +24,6 @@ module.exports = function () {
     productsController.uploadImage,
     productsController.updateProduct,
   );
-
+  router.delete("/products/:id", productsController.deleteProduct);
   return router;
 };

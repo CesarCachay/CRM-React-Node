@@ -93,3 +93,13 @@ exports.updateProduct = async (req, res, next) => {
     next();
   }
 };
+
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    await Products.findByIdAndDelete({ _id: req.params.id });
+    res.json({ message: "product deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
