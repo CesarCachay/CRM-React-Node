@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/restapi", {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 // Creating the server
