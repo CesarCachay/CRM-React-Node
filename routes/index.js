@@ -12,7 +12,11 @@ module.exports = function () {
   router.delete("/clients/:id", clientsController.deleteClient);
 
   // products services
-  router.post("/products", productsController.createProduct);
+  router.post(
+    "/products",
+    productsController.uploadImage,
+    productsController.createProduct,
+  );
 
   return router;
 };
